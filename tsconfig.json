@@ -15,9 +15,5 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": []
+  }
 }

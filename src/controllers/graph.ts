@@ -5,26 +5,27 @@ import dotenv from 'dotenv'
 // const express = require('express')
 // const dotenv = require('dotenv')
 dotenv.config()
+const mongoUrl = process.env.MONGO_URL || ''
+const dbName = process.env.MONGO_DBNAME || ''
 
 class Graph {
 	async get (req: Request, res: Response) {
-		// const db = await MongoClient.connect('')
-		// const data = await db.db('').collection('graph').findOne(
-		// 	{ title: 'world' },
-		// 	{ projection: { _id: 0, title: 0 } }
-		// )
-		// res.send(data)
-		res.send('hello')
+		const db = await MongoClient.connect(mongoUrl)
+		const data = await db.db(dbName).collection('graph').findOne(
+			{ title: 'world' },
+			{ projection: { _id: 0, title: 0 } }
+		)
+		res.send(data)
 	}
 
 	async put (req: Request, res: Response) {
+		const db = await MongoClient.connect(mongoUrl)
 		console.log(req.body)
-		// const db = await MongoClient.connect('')
-		// await db.db('').collection('graph').updateOne(
-		// 	{ title: 'world' },
-		// 	{ $set: req.body }
-		// )
-		res.send({})
+		await db.db(dbName).collection('graph').updateOne(
+			{ title: 'world' },
+			{ $set: req.body }
+		)
+		res.send(req.body)
 	}
 }
 

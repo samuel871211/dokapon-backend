@@ -13,6 +13,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use('/', graphRouter)
+app.get('/', (req, res) => res.send('welcome to dokapon API Service'))
 app.listen(process.env.PORT)
 
 export default app
