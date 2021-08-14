@@ -20,7 +20,6 @@ class Graph {
 
 	async put (req: Request, res: Response) {
 		const db = await MongoClient.connect(mongoUrl)
-		console.log(req.body)
 		await db.db(dbName).collection('graph').updateOne(
 			{ title: 'world' },
 			{ $set: req.body }
