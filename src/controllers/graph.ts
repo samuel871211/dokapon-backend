@@ -1,10 +1,6 @@
 import { Request, Response } from 'express'
 // import { MongoClient } from 'mongodb'
-// import dotenv from 'dotenv'
 import graph from '../static/graph/graph'
-// dotenv.config()
-// const mongoUrl = process.env.MONGO_URL || ''
-// const dbName = process.env.MONGO_DBNAME || ''
 
 class Graph {
 	get (req: Request, res: Response) {
