@@ -3,7 +3,7 @@ import { GOALS, GENDERS, COLORS, JOBS, NPCLEVELS } from '../utils/constants'
 import { validationResult, checkSchema, Meta } from 'express-validator'
 import { get } from 'lodash'
 import { MongoClient } from 'mongodb'
-import  { MONGO_URL, MONGO_DBNAME } from '../../config'
+import config from '../../config'
 
 class gameProgress {
     async get (req: Request, res: Response) {
@@ -19,8 +19,8 @@ class gameProgress {
         const slotIdx = req.params.slotIdx
         const gameProgress = req.body
         try {
-			const client = await MongoClient.connect(MONGO_URL)
-			const data = await client.db(MONGO_DBNAME).collection('user').updateOne(
+			const client = await MongoClient.connect(config.dbUrl)
+			const data = await client.db(config.dbName).collection('user').updateOne(
                 { slotIdx },
                 { $set: gameProgress }
             )

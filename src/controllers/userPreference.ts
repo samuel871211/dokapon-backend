@@ -2,14 +2,14 @@ import { Request, Response, NextFunction } from 'express'
 import { MongoClient } from 'mongodb'
 import { validationResult, checkSchema } from 'express-validator'
 import { LANGS, ASPECTRATIOS } from '../utils/constants'
-import  { MONGO_URL, MONGO_DBNAME } from '../../config'
+import  config from '../../config'
 
 class UserPreference {
     async get (req: Request, res: Response, next: NextFunction) {
         const userId = req.params.userId
     	try {
-			const client = await MongoClient.connect(MONGO_URL)
-			const data = await client.db(MONGO_DBNAME).collection('user').findOne({ userId })
+			const client = await MongoClient.connect(config.dbUrl)
+			const data = await client.db(config.dbName).collection('user').findOne({ userId })
             if (!data) return (res.status(404).send())
 			res.send(data)
 		} catch (e: unknown) {
@@ -24,8 +24,8 @@ class UserPreference {
         const userId = req.params.userId
         const userPreference = req.body
     	try {
-			const client = await MongoClient.connect(MONGO_URL)
-			const data = await client.db(MONGO_DBNAME).collection('userPreference').updateOne(
+			const client = await MongoClient.connect(config.dbUrl)
+			const data = await client.db(config.dbName).collection('userPreference').updateOne(
                 { userId },
                 { $set: userPreference }
             )

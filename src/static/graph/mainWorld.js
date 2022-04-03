@@ -1,4 +1,4 @@
-const graph = {
+const mainWorld = {
   "cells": [
     {
       "position": {
@@ -45463,4 +45463,4 @@ const graph = {
   "title": "world"
 }
 
-export default graph
+export default mainWorld
