@@ -50,7 +50,10 @@ class Graph {
 			}
 			const checkData = { name: req.params.name }
 			const IsDuplicateName = await db.db(config.dbName).collection('graph').findOne(checkData)
-			if (IsDuplicateName) return (res.status(400).send())
+			if (IsDuplicateName) {
+				res.status(400).send()
+				return
+			}
 
 			const result = await db.db(config.dbName).collection('graph').insertOne(newData)
 			// newData 此時多了 _id的欄位

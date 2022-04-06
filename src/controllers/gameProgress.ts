@@ -14,7 +14,10 @@ class gameProgress {
 	}
     async put (req: Request, res: Response) {
         const error = validationResult(req)
-        if (!error.isEmpty()) return (res.status(500).send(error))
+        if (!error.isEmpty()) {
+            res.status(500).send(error)
+            return
+        }
 
         const slotIdx = req.params.slotIdx
         const gameProgress = req.body
@@ -56,6 +59,8 @@ function checkIsValidGoalInput (input: any, meta: Meta) {
         return (input >= 1 && input <= 999)
     case 'money':
         return (input >= 1 && input <= 999999999)
+    default:
+        return true
     }
 }
 

@@ -10,7 +10,10 @@ class UserPreference {
     	try {
 			const client = await MongoClient.connect(config.dbUrl)
 			const data = await client.db(config.dbName).collection('user').findOne({ userId })
-            if (!data) return (res.status(404).send())
+            if (!data) {
+                res.status(404).send()
+                return
+            }
 			res.send(data)
 		} catch (e: unknown) {
             console.log(e)
@@ -19,7 +22,10 @@ class UserPreference {
     }
     async put (req: Request, res: Response, next: NextFunction) {
         const error = validationResult(req)
-        if (!error.isEmpty()) return (res.status(400).send(error))
+        if (!error.isEmpty()) {
+            res.status(400).send(error)
+            return
+        }
 
         const userId = req.params.userId
         const userPreference = req.body
